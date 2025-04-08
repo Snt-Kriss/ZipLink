@@ -1,0 +1,6 @@
+@ZipLink.Redirect_HostAddress = http://localhost:5226
+
+GET {{ZipLink.Redirect_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
