@@ -33,7 +33,9 @@
 					<td>@url.NumberOfClicks</td>
 					<td>@url.UserId</td>
 					<td>
-						<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">Remove</a>
+						<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-userId="@url.Id" asp-route-linkId="@url.UserId">
+							Remove
+						</a>
 					</td>
 				</tr>
 			}

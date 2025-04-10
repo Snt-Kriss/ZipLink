@@ -18,7 +18,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "specific",
+    pattern: "{controller=Home}/{action=Index}/{userId}/{linkId}");
+
 
 app.MapControllerRoute(
     name: "default",

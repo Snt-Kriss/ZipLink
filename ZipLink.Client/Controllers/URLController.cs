@@ -31,6 +31,15 @@ namespace ZipLink.Client.Controllers
             return View(allUrls);
         }
 
-        
+        public IActionResult Remove(int id)
+        {
+            return View();
+        }
+
+        public IActionResult Remove(int userId, int linkId)
+        {
+            return View();
+        }
+
     }
 }
