@@ -21,7 +21,7 @@ namespace ZipLink.Client.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", "Home");
+                return View("Login", loginVM);
             }
             return RedirectToAction("Index", "Home");
         }
