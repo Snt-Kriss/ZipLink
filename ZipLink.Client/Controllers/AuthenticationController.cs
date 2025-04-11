@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ZipLink.Client.Data.ViewModel;
 
 namespace ZipLink.Client.Controllers
 {
@@ -9,14 +10,35 @@ namespace ZipLink.Client.Controllers
             return View();
         }
 
+        //Render
         public IActionResult Login()
         {
-            return View();
+            return View(new LoginVM());
         }
 
+        //Handle
+        public IActionResult LoginSubmitted(LoginVM loginVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        //Render
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterVM());
+        }
+
+        public IActionResult RegisterUser(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Login", registerVM);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model PostUrlVM;
+
+@{
     ViewData["Title"] = "Welcome";
 }
 
@@ -21,15 +23,18 @@
 <section class="features" id="features">
     <div class="container">
         <div class="url-shorten-feature">
-            <form class="url-shorten-form" id="url-shorten-form">
+            <form class="url-shorten-form" id="url-shorten-form"
+            asp-controller="Home"
+            asp-action="ShortenURL">
                 <div>
                     <input
+                            asp-for="Url"
                            type="text"
                            class="url-input"
                            placeholder="Shorten a link here..."
                            autocomplete="off" />
 
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Url" class="text-danger"></span>
                 </div>
                 <button type="submit" class="btn btn-lg" style="">Shorten It!</button>
             </form>
