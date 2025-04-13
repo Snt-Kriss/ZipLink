@@ -4,6 +4,18 @@
 	ViewData["Title"] = "All short links";
 }
 
+@{
+	if (TempData["Error"] != null)
+	{
+		<div class="container">
+			<div class="alert alert-danger alert-dismissible fade show">
+				<strong>Error!</strong> @TempData["Error"]
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	}
+}
+
 <div class="container">
 	<a asp-action="Index" asp-controller="Home" class="btn btn-outline-success">Add New</a>
 </div>
@@ -31,9 +43,9 @@
 					<td>@url.OriginalLink</td>
 					<td>@url.ShortLink</td>
 					<td>@url.NumberOfClicks</td>
-					<td>@url.UserId</td>
+					<td>@(url.User !=null ? url.User.FullName : "-")</td>
 					<td>
-						<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">Remove</a>
+						<a class="btn btn-outline-danger" asp-controller="URL" asp-action="Remove">Remove</a>
 					</td>
 				</tr>
 			}

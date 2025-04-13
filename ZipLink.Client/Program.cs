@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using ZipLink.Client.Data;
+using ZipLink.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Configure app db context
+builder.Services.AddDbContext<AppDbContext>(options=>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
@@ -23,5 +33,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//Seed the database
+DbSeeder.SeedDefaultData(app);
 
 app.Run();
