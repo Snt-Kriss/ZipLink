@@ -15,6 +15,7 @@ namespace ZipLink.Data
 
         }
 
+        //Tables of the database
         public DbSet<Url> Urls { get; set; }
         public DbSet<User> Users { get; set; }
 

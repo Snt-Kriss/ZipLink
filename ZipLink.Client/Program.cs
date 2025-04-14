@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ZipLink.Client.Data;
 using ZipLink.Data;
+using ZipLink.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,13 @@ builder.Services.AddDbContext<AppDbContext>(options=>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+//Add services to the container
+builder.Services.AddScoped<IUrlsService, UrlService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+//Automapper
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

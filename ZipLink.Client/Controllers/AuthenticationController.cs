@@ -2,20 +2,22 @@
 using Microsoft.EntityFrameworkCore;
 using ZipLink.Client.Data.ViewModel;
 using ZipLink.Data;
+using ZipLink.Data.Services;
 
 namespace ZipLink.Client.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private AppDbContext _context;
+        
+        private IUserService _userService;
 
-        public AuthenticationController(AppDbContext context)
+        public AuthenticationController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
         public IActionResult Users()
         {
-            var users = _context.Users.Include(n=> n.Urls).ToList();
+            var users = _userService.GetUsers();
             return View(users);
         }
 
