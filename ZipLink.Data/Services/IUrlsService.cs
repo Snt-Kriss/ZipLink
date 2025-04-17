@@ -9,10 +9,10 @@ namespace ZipLink.Data.Services
 {
     public interface IUrlsService
     {
-        List<Url> GetUrls();
-        Url GetById(int id);
-        Url Update(int id, Url url);
-        void Delete(int id);
-        Url Add(Url url);
+        Task<List<Url>> GetUrlsAsync();
+        Task<Url> GetByIdAsync(int id);
+        Task<Url> UpdateAsync(int id, Url url);
+        Task DeleteAsync(int id);
+        Task<Url> AddAsync(Url url);
     }
 }

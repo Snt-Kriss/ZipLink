@@ -19,49 +19,49 @@ namespace ZipLink.Data.Services
 
         
 
-        public User GetById(int id)
-        {
-            var user = _context.Users.FirstOrDefault(n => n.Id == id);
-            return user;
-        }
+        //public async Task<AppUser> GetByIdAsync(string id)
+        //{
+        //    var user = await _context.Users.FirstOrDefaultAsync(n => n.Id == id);
+        //    return user;
+        //}
 
-        public List<User> GetUsers()
+        public async Task<List<AppUser>> GetUsersAsync()
         {
-            var users = _context.Users.Include(n => n.Urls).ToList();
+            var users =await _context.Users.Include(n => n.Urls).ToListAsync();
             return users;
         }
 
-        public User Add(User user)
-        {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return user;
-        }
+        //public async Task<AppUser> AddAsync(AppUser user)
+        //{
+        //    await _context.Users.AddAsync(user);
+        //    await _context.SaveChangesAsync();
+        //    return user;
+        //}
 
-        public User Update(int id, User user)
-        {
-            var userDb = _context.Users.FirstOrDefault(u => u.Id == id);
-            if (userDb != null)
-            {
-                userDb.Email = user.Email;
-                userDb.FullName = user.FullName;
+        //public async Task<AppUser> UpdateAsync(string id, AppUser user)
+        //{
+        //    var userDb = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        //    if (userDb != null)
+        //    {
+        //        userDb.Email = user.Email;
+        //        userDb.FullName = user.FullName;
 
-                _context.Update(userDb);
-                _context.SaveChanges();
+        //        //_context.Update(userDb);
+        //       await  _context.SaveChangesAsync();
 
-            }
-            return userDb;
-        }
+        //    }
+        //    return userDb;
+        //}
 
-        public void Delete(int id)
-        {
-            var userDb = _context.Users.FirstOrDefault(u => u.Id == id);
-            if (userDb != null)
-            {
-                _context.Users.Remove(userDb);
-                _context.SaveChanges();
-            }
-        }
+        //public async Task DeleteAsync(string id)
+        //{
+        //    var userDb = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        //    if (userDb != null)
+        //    {
+        //        _context.Users.Remove(userDb);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //}
 
        
     }

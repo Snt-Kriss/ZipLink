@@ -1,45 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ZipLink.Client.Data.ViewModel;
-using ZipLink.Data;
 using ZipLink.Data.Services;
 
 namespace ZipLink.Client.Controllers
 {
     public class URLController : Controller
     {
-        //private AppDbContext _context;
         private IUrlsService _urlServce;
         public URLController(IUrlsService urlsService)
         {
             _urlServce = urlsService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var entities = await _urlServce.GetUrlsAsync();
 
-            //SELECT Id, OriginalLink, etc FROM URLS
-            var allUrlsFromDb = _urlServce.GetUrls()
+            var allUrlsFromDb =entities
                 .Select(url => new GetUrlVM()
-            {
-                Id = url.Id,
-                OriginalLink = url.OriginalLink,
-                ShortLink = url.ShortLink,
-                NumberOfClicks = url.NumberOfClicks,
-                UserId = url.UserId,
-
-                User = url.User != null ? new GetUserVM()
                 {
-                    Id = url.User.Id,
-                    FullName = url.User.FullName
-                } : null
-            }).ToList();
+                    Id = url.Id,
+                    OriginalLink = url.OriginalLink,
+                    ShortLink = url.ShortLink,
+                    NumberOfClicks = url.NumberOfClicks,
+                    UserId = url.UserId,
+
+                    User = url.User != null ? new GetUserVM()
+                    {
+                        Id = url.User.Id,
+                        FullName = url.User.FullName
+                    } : null
+                }).ToList();
 
             return View(allUrlsFromDb);
         }
 
-        public IActionResult Remove(int id)
+        public async  Task<IActionResult> Remove(int id)
         {
-            _urlServce.Delete(id);
+            await _urlServce.DeleteAsync(id);
             return RedirectToAction("Index");
         }
 

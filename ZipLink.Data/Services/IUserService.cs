@@ -9,11 +9,11 @@ namespace ZipLink.Data.Services
 {
     public interface IUserService
     {
-        List<User> GetUsers();
-        User GetById(int id);
-        User Update(int id, User user);
-        void Delete(int id);
+        Task<List<AppUser>> GetUsersAsync();
+        //Task<AppUser> GetByIdAsync(string id);
+        //Task<AppUser> UpdateAsync(string id, AppUser user);
+        //Task DeleteAsync(string id);
 
-        User Add(User user);
+        //Task<AppUser> AddAsync(AppUser user);
     }
 }
